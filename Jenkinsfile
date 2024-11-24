@@ -41,7 +41,7 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
-                pytest /test/app_test.py --junitxml=test-results.xml
+                pytest test/app_test.py --junitxml=test-results.xml
                 '''
             }
             post {
