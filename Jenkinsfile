@@ -39,8 +39,8 @@ pipeline {
         stage('Run Unit Tests') {
             steps {
                 sh '''
-                source venv/bin/activate
-                pytest ./test --junitxml=test-results.xml
+                . venv/bin/activate
+                pytest /test --junitxml=test-results.xml
                 '''
             }
         }
