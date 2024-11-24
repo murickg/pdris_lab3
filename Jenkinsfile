@@ -43,6 +43,11 @@ pipeline {
                 pytest /test --junitxml=test-results.xml
                 '''
             }
+            post {
+                always {
+                    junit 'test-results.xml'
+                }
+            }
         }
     }
     post {
