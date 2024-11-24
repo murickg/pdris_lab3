@@ -47,7 +47,7 @@ pipeline {
             post {
                 always {
                     junit 'test-results.xml'
-                    step([$class: 'CoberturaPublisher', coberturaReportFile: 'coverage.xml'])
+                    step([$class: 'CoberturaPublisher', coberturaReportFile: 'coverage_results.xml'])
                 }
             }
         }
