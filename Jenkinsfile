@@ -54,7 +54,7 @@ pipeline {
                 // Запуск тестов и генерация отчёта покрытия
                 sh '''
                 source venv/bin/activate
-                pytest ./test/ --junitxml=test-results.xml
+                pytest ./test --junitxml=test-results.xml
                 '''
             }
         }
