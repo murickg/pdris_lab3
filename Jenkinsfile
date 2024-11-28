@@ -57,7 +57,7 @@ pipeline {
             }
             steps {
                 script {
-                    withSonarQubeEnv(SONARQUBE_ENV) {
+                    withSonarQubeEnv('sonar') {
                         sh '''
                         ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=pdris-lab4 \
