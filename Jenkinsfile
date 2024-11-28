@@ -53,11 +53,11 @@ pipeline {
         }
         stage('Code Analysis') {
             environment {
-                scannerHome = tool 'sonar'
+                scannerHome = tool 'SonarScanner'
             }
             steps {
                 script {
-                    withSonarQubeEnv('SonarScanner') {
+                    withSonarQubeEnv() {
                         sh '''
                         ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=pdris-lab3 \
