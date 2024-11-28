@@ -11,6 +11,8 @@ services:
     container_name: jenkins
     volumes:
       - ./volume_storage/jenkins_data:/var/jenkins_home
+    networks:
+      - ciNetwork
 
   sonarqube:
     image: sonarqube:community
@@ -26,6 +28,8 @@ services:
       - ./volume_storage/sonarqube_logs:/opt/sonarqube/logs
     ports:
       - "9000:9000"
+    networks:
+      - ciNetwork
 
   db:
     image: postgres:15
@@ -35,3 +39,9 @@ services:
     volumes:
       - ./volume_storage/postgresql:/var/lib/postgresql
       - ./volume_storage/postgresql_data:/var/lib/postgresql/data
+    networks:
+      - ciNetwork
+
+networks:
+  ciNetwork:
+    driver: bridge

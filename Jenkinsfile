@@ -51,6 +51,28 @@ pipeline {
                 }
             }
         }
+        stage('Code Analysis') {
+            environment {
+                scannerHome = tool 'sonar'
+            }
+            steps {
+                script {
+                    withSonarQubeEnv('sonar') {
+                        sh '''
+                        ${scannerHome}/bin/sonar-scanner \
+                            -Dsonar.projectKey=pdris-lab3 \
+                            -Dsonar.projectName="pdris lab3" \
+                            -Dsonar.projectVersion=1.0 \
+                            -Dsonar.sources=app/ \
+                            -Dsonar.language=py \
+                            -Dsonar.host.url=http://sonarqube:9000 \
+                            -Dsonar.python.coverage.reportPaths=coverage_results.xml \
+                            -Dsonar.login=$SONAR_AUTH_TOKEN
+                        '''
+                    }
+                }
+            }
+        }
     }
     post {
         success {
