@@ -1,7 +1,7 @@
 # pdris_lab4
 Laboratory work on Jenkins
 
-Ниже представлены скрины работы джобы в Jenkins
+Ниже представлены скрины работы джобы в Jenkins.
 
 ![](jenkins_test_result.png)
 ![](sonarqube_test_result.png)
