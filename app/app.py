@@ -9,7 +9,7 @@ def db_connection():
         database="database_flask",
         user="postgres",
         password="postgres",
-        host="db"
+        host="postgres-db"
     )
     return connection
 
