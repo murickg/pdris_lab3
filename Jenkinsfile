@@ -24,7 +24,6 @@ pipeline {
                 sh 'apt install -y python3 python3-pip'
                 sh 'apt install -y python3-pytest python3-venv'
                 sh 'apt install -y libpq-dev'
-                sh 'pip3 install allure-pytest'
             }
         }
         stage("Build Virtual Environment"){
@@ -42,6 +41,7 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
+                pip3 install allure-pytest
                 pytest test/app_test.py --cov=app --junitxml=test-results.xml --cov-report=xml:coverage_results.xml --alluredir=allure-results
                 '''
             }
