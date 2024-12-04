@@ -41,13 +41,19 @@ pipeline {
             steps {
                 sh '''
                 . venv/bin/activate
-                pytest test/app_test.py --cov=app --junitxml=test-results.xml --cov-report=xml:coverage_results.xml
+                pytest test/app_test.py --cov=app --junitxml=test-results.xml --cov-report=xml:coverage_results.xml --alluredir=allure-results
                 '''
             }
             post {
                 always {
                     junit 'test-results.xml'
-                    step([$class: 'CoberturaPublisher', coberturaReportFile: 'coverage_results.xml'])
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: ALWAYS,
+                        results: [[path: 'allure-results']
+                    ])
                 }
             }
         }
