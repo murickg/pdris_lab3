@@ -1,21 +1,26 @@
-# pdris_lab3
-Laboratory work on Docker
+# pdris_lab5
+Laboratory work on K8s
 
-Скрипт ```start.sh``` собирает и запускает приложение.
+Для начала скачаем minikube и запустим его
 
-Скрипт ```stop.sh``` останавливает все контейнеры, запущенные docker-compose, и удаляет их. 
+Напишем манифесты для minikube, чтобы развернуть наше приложение
 
-Чтобы добавить данные ```name```, ```last_name``` в БД, пишем в терминал
+Далее развернем приложение и бд
+
 ```bash
- curl --header "Content-Type: application/json" \
-    --request POST \
-    --data '{"name":"<name>", "last_name":"<last_name>"}' \
-    http://127.0.0.1:8000/add_user
+kubectl apply -f flask-app-deployment.yml
+kubectl apply -f postgres-deployment.yml
+kubectl apply -f postgres-pvc.yml
 ```
 
-Чтобы посмотреть все данные в таблице пишем в терминал
+Далее откроем соединение с нашим LoadBalancer сервисом
 ```bash
-curl --header "Content-Type: application/json" \
-    --request GET \
-    http://127.0.0.1:8000/get_users
+minikube tunnel
 ```
+
+Во втором терминале получим URL-адрес для подключения к нашему сервису
+```bash
+minikube service flask-app-service
+```
+
+Success!!:)
